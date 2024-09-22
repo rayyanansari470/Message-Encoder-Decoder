@@ -2,6 +2,7 @@ import random
 import string
 import tkinter as tk
 from tkinter import messagebox
+from PIL import Image, ImageTk
 
 def code_message():
     alphabets = string.ascii_lowercase
@@ -47,18 +48,31 @@ def decode_message():
 
 # Create the main window
 root = tk.Tk()
+root.config(bg="#f5f5f5")
 root.title("Message Coder/Decoder")
+root.geometry("800x500")
+
+image = Image.open("secret folder.png")  # Replace with your PNG file path
+resized_image = image.resize((300, 300))  # Resize the image (width, height)
+
+photo = ImageTk.PhotoImage(resized_image)
+
+# Create a label widget for the image
+label = tk.Label(root, image=photo, bg="#f5f5f5")
+
+# Adjust the position of the image using the 'place' method
+label.place(x=615, y=20)  # x and y set the position
 
 # Create and pack the entry widget
-entry_sentence = tk.Entry(root, width=50)
-entry_sentence.pack(pady=10)
+entry_sentence = tk.Entry(root, bg="#eaeaea", width=80)
+entry_sentence.place(x=535, y=360)
 
 # Create and pack the code and decode buttons
-button_code = tk.Button(root, text="Code Message", command=code_message)
-button_code.pack(side="left", padx=10)
+button_code = tk.Button(root, text="Code Message",width=30, height=3, fg="#ffffff", bg="#2c3e50", command=code_message)
+button_code.place(x=500, y=550)
 
-button_decode = tk.Button(root, text="Decode Message", command=decode_message)
-button_decode.pack(side="right", padx=10)
+button_decode = tk.Button(root, text="Decode Message",width=30, height=3, fg="#ffffff", bg="#2c3e50", command=decode_message)
+button_decode.place(x=830, y=550)
 
 # Run the main event loop
 root.mainloop()
